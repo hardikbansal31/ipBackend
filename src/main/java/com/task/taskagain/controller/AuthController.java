@@ -25,19 +25,13 @@ public class AuthController {
         return ResponseEntity.ok(Map.of("token", token));
     }
 
-    //    @PostMapping("/login")
-//    public ResponseEntity<?> login(@RequestBody Map<String, String> payload) {
-//        String token = authService.loginUser(payload.get("username"), payload.get("password"));
-//        return ResponseEntity.ok(Map.of("token", token));
-//    }
     @PostMapping("/login")
     public ResponseEntity<?> login(@RequestBody Map<String, String> payload) {
         String token = authService.loginUser(payload.get("username"), payload.get("password"));
 
-        // ✅ Return both token & username
         return ResponseEntity.ok(Map.of(
                 "token", token,
-                "username", payload.get("username")  // Since the username is sent in the request
+                "username", payload.get("username")
         ));
     }
 

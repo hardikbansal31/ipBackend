@@ -8,10 +8,10 @@ import com.task.taskagain.model.User;
 import com.task.taskagain.repository.UserRepository;
 import java.util.List;
 
-@CrossOrigin(origins = "http://localhost:3000") // ✅ Allow frontend requests
+@CrossOrigin(origins = "http://localhost:3000")
 @RestController
 @RequestMapping("/api/users")
-@PreAuthorize("hasRole('ADMIN')") // ✅ Only admins can fetch users
+@PreAuthorize("hasRole('ADMIN')")
 public class UserController {
 
     @Autowired

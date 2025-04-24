@@ -29,10 +29,9 @@ public class User implements UserDetails {
     @Enumerated(EnumType.STRING)
     private Role role;
 
-    // ✅ Spring Security requires this method
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return List.of(() -> "ROLE_" + role.name()); // Example: ROLE_ADMIN or ROLE_USER
+        return List.of(() -> "ROLE_" + role.name());
     }
 
     @Override

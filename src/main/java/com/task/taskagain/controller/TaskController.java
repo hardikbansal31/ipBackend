@@ -20,21 +20,19 @@ public class TaskController {
     }
 
     @PostMapping
-    @PreAuthorize("hasRole('ADMIN')") // ✅ Only admins can assign tasks
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<?> assignTask(@RequestBody TaskRequest request) {
         Task task = taskService.assignTask(request.getUserId(), request.getDescription());
         return ResponseEntity.ok(task);
     }
 
-    // ✅ ADD THIS: Fetch tasks for the logged-in user
     @GetMapping
-    @PreAuthorize("hasAnyRole('ADMIN', 'USER')") // ✅ Both users & admins can fetch tasks
+    @PreAuthorize("hasAnyRole('ADMIN', 'USER')")
     public ResponseEntity<List<Task>> getUserTasks() {
         List<Task> tasks = taskService.getUserTasks();
         return ResponseEntity.ok(tasks);
     }
 
-    // 🔹 User marks a task as completed
     @PreAuthorize("hasRole('USER')")
     @PostMapping("/complete/{taskId}")
     public ResponseEntity<String> completeTask(@PathVariable Long taskId) {
